@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
-const _ = require('lodash');
+const _ = require('lodash');  //for names with smallcase or uppercase
 //const date = require(__dirname + "/date.js");
 
 const app = express();
@@ -21,7 +21,7 @@ const listSchema = mongoose.Schema({
 //creating new schema
 const itemsSchema = mongoose.Schema({
   name: String,
-  items: [listSchema]   //array of listSchema associated with it
+  items: [listSchema]   //array of listSchema associated with it (array of objects)
 })
 
 const Item = mongoose.model('Item',listSchema); //for listSchema
@@ -74,7 +74,7 @@ app.get('/:customListName',function(req,res){
   
   //findOne gives an object back- returns only 1 document if found
   List.findOne({ name: customListName},function(err,foundList){
-    //foundList is not an array, so check if it's exist or not
+    //foundList is not an array, so check if it's exist or not (object)
     if(!foundList){
       //console.log('Does not Exist');
 
